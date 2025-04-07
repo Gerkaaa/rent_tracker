@@ -19,6 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: pages[_selectedIndex],
       bottomNavigationBar: NavigationBar(
+        height: 65,
+        backgroundColor: const Color(0xFFF3F4F9),
         selectedIndex: _selectedIndex,
         onDestinationSelected: (int index) {
           setState(() {
