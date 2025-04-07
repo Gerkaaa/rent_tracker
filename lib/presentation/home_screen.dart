@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> pages = <Widget>[LongTermScreen(), DailyScreen()];
+  static List<Widget> pages = <Widget>[LongTermScreen(), DailyScreen()];
 
   @override
   Widget build(BuildContext context) {
