@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rent_tracker/core/constants/months.dart';
 import 'package:rent_tracker/core/utils/date_utils.dart';
+import 'package:rent_tracker/presentation/long_term_screen/add_long_term_apartment_screen.dart';
 import 'package:rent_tracker/presentation/long_term_screen/widgets/long_term_apartment_card.dart';
 import 'package:rent_tracker/presentation/widgets/custom_app_bar.dart';
 
@@ -14,8 +15,7 @@ class LongTermScreen extends StatefulWidget {
 class _LongTermScreenState extends State<LongTermScreen> {
   DateTime _currentMonth = DateTime(DateTime.now().year, DateTime.now().month);
 
-
-// пока что
+  // пока что
   final List<Map<String, dynamic>> apartments = [
     {
       'address': 'проспект Имама Шамиля, 42',
@@ -117,10 +117,19 @@ class _LongTermScreenState extends State<LongTermScreen> {
           titleText: 'Долгий срок',
           currentMonth: _currentMonth,
           onSelectMonth: _showMonthPickerDialog,
-          onAddPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Добавление квартиры')),
+          onAddPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const AddLongTermApartmentScreen(),
+              ),
             );
+
+            if (result != null && result is Map<String, dynamic>) {
+              setState(() {
+                apartments.add(result);
+              });
+            }
           },
         ),
         body: ListView.builder(
