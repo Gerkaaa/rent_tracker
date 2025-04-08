@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rent_tracker/core/constants/months.dart';
 import 'package:rent_tracker/presentation/daily_screen/daily_payments_history_screen.dart';
+import 'package:rent_tracker/presentation/daily_screen/widgets/add_payment_dialog.dart';
 import 'package:rent_tracker/presentation/widgets/custom_app_bar.dart';
 
 class DailyScreen extends StatefulWidget {
@@ -215,7 +217,20 @@ class _DailyScreenState extends State<DailyScreen> {
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final amount = await showAddPaymentDialog(context);
+                            if (amount != null) {
+                              setState(() {
+                                manager['payments'].add({
+                                  'amount': amount,
+                                  'date': DateFormat(
+                                    'dd.MM.yyyy',
+                                  ).format(DateTime.now()),
+                                });
+                              });
+                            }
+                          },
+
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1B72C0),
                             foregroundColor: Colors.white,
