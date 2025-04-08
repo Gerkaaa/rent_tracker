@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_tracker/core/constants/months.dart';
+import 'package:rent_tracker/presentation/daily_screen/daily_payments_history_screen.dart';
 import 'package:rent_tracker/presentation/widgets/custom_app_bar.dart';
 
 class DailyScreen extends StatefulWidget {
@@ -234,7 +235,18 @@ class _DailyScreenState extends State<DailyScreen> {
                       ),
                       const SizedBox(width: 12),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (_) => DailyPaymentsHistoryScreen(
+                                    managerName: manager['name'],
+                                    payments: manager['payments'],
+                                  ),
+                            ),
+                          );
+                        },
                         icon: const Icon(Icons.history),
                         tooltip: 'История поступлений',
                       ),
